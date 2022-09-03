@@ -1,4 +1,4 @@
-/*=============== SHOW MENU ===============*/
+// /*=============== SHOW MENU ===============*/
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const navClose = document.getElementById('nav-close');
@@ -19,7 +19,7 @@ if(navClose) {
   navClose.addEventListener('click', closeMenu);
 }
 
-/*=============== REMOVE MENU MOBILE ===============*/
+// /*=============== REMOVE MENU MOBILE ===============*/
 const navLinks = document.querySelectorAll('.nav__link');
 
 const linkAction = () => {
