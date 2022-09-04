@@ -83,10 +83,48 @@ const calculateBmi = (e) => {
 
     setTimeout(() => {
       calculateMsg.textContent = '';
-    }, 4000)
+    }, 4000);
   }
 };
 
 calculateForm.addEventListener('submit', calculateBmi);
 
 /*=============== EMAIL JS ===============*/
+const contactForm = document.getElementById('contact-form');
+const contactUser = document.getElementById('contact-user');
+const contactMsg = document.getElementById('contact-message');
+
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  if(contactUser.value === '') {
+    contactMsg.classList.remove('color-green');
+    contactMsg.classList.add('color-red');
+  
+    contactMsg.textContent = 'You must enter your email ☝';
+
+    setTimeout(() => {
+      contactMsg.textContent = '';
+    }, 3000);
+
+  } else {
+    emailjs.sendForm('service_gh4vvx9', 'template_cnjf0jk', '#contact-form', '9Wwf805ObArIc0CF-')
+      .then(() => {
+        contactMsg.classList.remove('color-red');
+        contactMsg.classList.add('color-green');
+        contactMsg.textContent = `Your subscribed successfully 🥳`;
+
+        contactForm.reset();
+
+        setTimeout(() => {
+          contactMsg.textContent = '';
+        }, 3000);
+      })
+      .catch(e => {
+        contactMsg.classList.add('color-red');
+        contactMsg.textContent = `OOOPS! SOMETHING HAS FAILED... ${e}`;
+      });
+  }
+};
+
+contactForm.addEventListener('submit', sendEmail);
