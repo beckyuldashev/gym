@@ -47,6 +47,46 @@ window.addEventListener('scroll', scrollHeader);
 
 
 /*=============== CALCULATE JS ===============*/
+const calculateForm = document.getElementById('calculate-form');
+const calculateCm = document.getElementById('calculate-cm');
+const calculateKg = document.getElementById('calculate-kg');
+const calculateMsg = document.getElementById('calculate-message');
 
+const calculateBmi = (e) => {
+  e.preventDefault();
+
+  if(calculateCm.value === '' || calculateKg.value === '') {
+    calculateMsg.classList.add('color-red');
+    calculateMsg.classList.remove('color-green');
+    calculateMsg.textContent = 'Fill in the Height and Weight 👨‍💻';
+  
+    setTimeout(() => {
+      calculateMsg.textContent = '';
+    }, 3000);
+  } else {
+    
+    const cm = calculateCm.value / 100;
+    const kg = calculateKg.value;
+    const bmi = Math.round(kg / (cm * cm));
+
+    calculateMsg.classList.add('color-green');
+
+    if(bmi < 18.5) {
+      calculateMsg.textContent = `Your bmi is ${bmi} and you are skinny 😔`;
+    } else if (bmi < 25)  {
+      calculateMsg.textContent = `Your bmi is ${bmi} and you are healthy 🥳`;
+    } else {
+      calculateMsg.textContent = `Your bmi is ${bmi} and you are overweight 😔`;
+    }
+
+    calculateForm.reset();
+
+    setTimeout(() => {
+      calculateMsg.textContent = '';
+    }, 4000)
+  }
+};
+
+calculateForm.addEventListener('submit', calculateBmi);
 
 /*=============== EMAIL JS ===============*/
